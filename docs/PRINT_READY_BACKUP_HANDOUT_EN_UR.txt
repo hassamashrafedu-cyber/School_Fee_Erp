@@ -1,0 +1,95 @@
+FEE ERP - SCHOOL BACKUP & DISASTER RECOVERY HANDOUT (PRINT READY)
+==================================================================
+
+School Name: _______________________________
+Campus/Branch: _____________________________
+Install Date: ______________________________
+Responsible Person: ________________________
+Contact Number: ____________________________
+
+
+------------------------------------------------------------------
+ENGLISH - DAILY BACKUP POLICY
+------------------------------------------------------------------
+
+1) Daily backup time: ________ PM
+2) Backup file must be created every day (.backup file).
+3) Keep 3 copies of backup:
+   - Local school PC/Server
+   - External drive
+   - Cloud/offsite storage
+4) Before software update/version change:
+   - Take fresh backup first (mandatory).
+5) Monthly restore test:
+   - Restore latest backup on test PC and verify.
+6) If PC is lost/corrupt:
+   - Install Windows + PostgreSQL + FEE ERP
+   - Restore latest .backup
+   - Apply saved backend/.env settings
+
+Important:
+No backup = risk of permanent data loss.
+
+
+------------------------------------------------------------------
+URDU - ROZANA BACKUP POLICY
+------------------------------------------------------------------
+
+1) Rozana backup ka waqt: ________ PM
+2) Har din nayi .backup file ban'na zaroori hai.
+3) Backup ki 3 copies rakhein:
+   - School PC/Server
+   - External drive
+   - Cloud/offsite storage
+4) Software update/version change se pehle:
+   - Fresh backup lazmi lein.
+5) Har mahine restore test:
+   - Test PC par latest backup restore karke verify karein.
+6) Agar PC kharab ya gum ho jaye:
+   - Windows + PostgreSQL + FEE ERP dobara install karein
+   - Latest .backup restore karein
+   - Saved backend/.env settings apply karein
+
+Ahm Note:
+Backup na ho to data hamesha ke liye lose ho sakta hai.
+
+
+------------------------------------------------------------------
+BACKUP LOCATIONS (FILL DURING HANDOVER)
+------------------------------------------------------------------
+
+Primary Backup Folder:
+____________________________________________________________
+
+External Backup Device:
+____________________________________________________________
+
+Cloud/Offsite Location:
+____________________________________________________________
+
+
+------------------------------------------------------------------
+EMERGENCY CONTACTS
+------------------------------------------------------------------
+
+Vendor Name: ______________________________________________
+Vendor Phone: _____________________________________________
+Vendor Email: _____________________________________________
+School IT Contact: ________________________________________
+Principal/Admin Contact: __________________________________
+
+
+------------------------------------------------------------------
+ACKNOWLEDGEMENT
+------------------------------------------------------------------
+
+I confirm that backup and restore process has been explained, and
+school staff understands daily backup responsibility.
+
+School Representative Name: ________________________________
+Designation: ______________________________________________
+Signature: _____________________  Date: ____________________
+
+Vendor Representative Name: ________________________________
+Signature: _____________________  Date: ____________________
+

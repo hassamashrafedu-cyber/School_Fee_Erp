@@ -1,0 +1,525 @@
+.config-page {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: none;
+}
+
+.config-page__title {
+  margin: 0;
+  font-size: clamp(20px, 1.6vw, 24px);
+  font-weight: 750;
+  letter-spacing: -0.02em;
+  color: var(--text-main, #0f172a);
+}
+
+.config-page__intro {
+  margin: 6px 0 0;
+  color: var(--muted, #64748b);
+  font-size: 14px;
+  line-height: 1.55;
+  max-width: 62ch;
+}
+
+.config-banner {
+  font-size: 13px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid #fecaca;
+  background: #fef2f2;
+  color: #991b1b;
+}
+
+.config-banner--success {
+  border-color: #bbf7d0;
+  background: #f0fdf4;
+  color: #166534;
+}
+
+/* ——— Hub groups ——— */
+.config-hub {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.config-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px 16px 18px;
+  border-radius: 18px;
+  border: 1px solid var(--panel-border, rgba(15, 23, 42, 0.08));
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96) 0%, #ffffff 100%);
+  box-shadow: var(--panel-shadow-sm, 0 1px 2px rgba(15, 23, 42, 0.04));
+}
+
+.config-group--school {
+  border-color: #99f6e4;
+  background: linear-gradient(180deg, #f0fdfa 0%, #ffffff 42%);
+}
+
+.config-group--operations {
+  border-color: #bae6fd;
+  background: linear-gradient(180deg, #f0f9ff 0%, #ffffff 42%);
+}
+
+.config-group--safety {
+  border-color: #fed7aa;
+  background: linear-gradient(180deg, #fff7ed 0%, #ffffff 48%);
+}
+
+.config-group--info {
+  border-color: #e2e8f0;
+  background: linear-gradient(180deg, #f8fafc 0%, #ffffff 48%);
+}
+
+.config-group__header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 0 2px 2px;
+}
+
+.config-group__title {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 750;
+  letter-spacing: -0.01em;
+  color: var(--text-main, #0f172a);
+}
+
+.config-group__hint {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--muted, #64748b);
+  max-width: 70ch;
+}
+
+.config-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+}
+
+.config-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  height: 100%;
+  padding: 16px 16px 14px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+  transition:
+    border-color 0.18s ease,
+    box-shadow 0.18s ease,
+    transform 0.18s ease;
+}
+
+.config-card:hover {
+  border-color: #5eead4;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
+}
+
+.config-card--delete:hover {
+  border-color: #fda4af;
+}
+
+.config-card__icon {
+  flex: 0 0 auto;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: #f0fdfa;
+  color: var(--accent, #0d9488);
+  display: grid;
+  place-items: center;
+}
+
+.config-card--delete .config-card__icon {
+  background: #fff1f2;
+  color: #e11d48;
+}
+
+.config-card--backup .config-card__icon {
+  background: #fff7ed;
+  color: #c2410c;
+}
+
+.config-card--password .config-card__icon {
+  background: #f0f9ff;
+  color: #0284c7;
+}
+
+.config-card--promotion .config-card__icon {
+  background: #ecfdf5;
+  color: #047857;
+}
+
+.config-card__body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.config-card__title {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-main, #0f172a);
+  letter-spacing: -0.01em;
+}
+
+.config-card__desc {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--muted, #64748b);
+  flex: 1;
+}
+
+.config-card__btn {
+  align-self: flex-start;
+  margin-top: 4px;
+  min-height: 40px;
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--accent, #0d9488);
+  background: var(--accent, #0d9488);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 650;
+  cursor: pointer;
+  transition: background 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.config-card__btn:hover {
+  background: var(--accent-strong, #0f766e);
+  border-color: var(--accent-strong, #0f766e);
+  box-shadow: 0 6px 14px rgba(13, 148, 136, 0.22);
+}
+
+.config-card__btn:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring, 0 0 0 3px rgba(13, 148, 136, 0.28));
+}
+
+.config-card--delete .config-card__btn {
+  background: #e11d48;
+  border-color: #be123c;
+}
+
+.config-card--delete .config-card__btn:hover {
+  background: #be123c;
+  border-color: #9f1239;
+  box-shadow: 0 6px 14px rgba(225, 29, 72, 0.22);
+}
+
+/* ——— Detail panels ——— */
+.config-panel,
+.config-section {
+  border: 1px solid var(--panel-border, #e2e8f0);
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: var(--panel-shadow-sm, 0 1px 2px rgba(15, 23, 42, 0.04));
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.config-panel__title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 750;
+  letter-spacing: -0.01em;
+}
+
+.config-panel__hint {
+  margin: 0;
+  font-size: 13px;
+  color: var(--muted, #64748b);
+  line-height: 1.55;
+  max-width: 68ch;
+}
+
+.config-panel__hint--danger {
+  color: #9f1239;
+}
+
+.config-panel--danger,
+.config-danger-zone {
+  border-color: #fecdd3;
+  background: linear-gradient(180deg, #fff1f2 0%, #ffffff 70%);
+}
+
+.config-panel--passwords .label {
+  display: grid;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--muted, #64748b);
+}
+
+.config-password-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.config-password-block,
+.config-purge-block {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 14px;
+  border: 1px solid var(--border, #e2e8f0);
+  border-radius: 12px;
+  background: var(--panel-soft, #f8fafc);
+}
+
+.config-purge-block {
+  border-color: #fecaca;
+  background: #ffffff;
+}
+
+.config-password-block__title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-main, #0f172a);
+}
+
+.config-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.config-form__row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 14px;
+  align-items: flex-end;
+}
+
+.config-form__row .label {
+  flex: 1 1 220px;
+  min-width: 0;
+  display: grid;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted, #64748b);
+}
+
+.config-form__row .input,
+.config-form__row select.input,
+.config-panel .input,
+.config-panel select.input {
+  min-height: 42px;
+}
+
+.config-btn {
+  min-height: 42px;
+  padding: 8px 16px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 650;
+  cursor: pointer;
+  border: 1px solid var(--accent, #0d9488);
+  background: var(--accent, #0d9488);
+  color: #ffffff;
+  transition: background 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.config-btn:hover {
+  background: var(--accent-strong, #0f766e);
+  border-color: var(--accent-strong, #0f766e);
+}
+
+.config-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.config-btn:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring, 0 0 0 3px rgba(13, 148, 136, 0.28));
+}
+
+.config-btn--ghost {
+  background: #ffffff;
+  color: var(--text-main, #0f172a);
+  border-color: #cbd5e1;
+}
+
+.config-btn--ghost:hover {
+  background: #f8fafc;
+  border-color: #94a3b8;
+}
+
+.config-btn--danger {
+  background: #b91c1c;
+  border-color: #991b1b;
+  color: #ffffff;
+}
+
+.config-btn--danger:hover {
+  background: #991b1b;
+}
+
+.config-logo-preview {
+  width: 96px;
+  height: 96px;
+  object-fit: contain;
+  border-radius: 14px;
+  border: 1px solid var(--border, #e2e8f0);
+  background: #f8fafc;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.8);
+}
+
+.config-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.config-loading,
+.config-empty {
+  font-size: 13px;
+  color: var(--muted, #64748b);
+  margin: 0;
+  padding: 8px 0;
+}
+
+.config-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: min(360px, 50vh);
+  overflow: auto;
+  padding-right: 4px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.config-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--border, #e2e8f0);
+  background: #f8fafc;
+  transition: border-color 140ms ease, background 140ms ease;
+}
+
+.config-list-item:hover {
+  border-color: #99f6e4;
+  background: #ffffff;
+}
+
+.config-list-item__name {
+  font-weight: 600;
+  font-size: 14px;
+  color: #0f172a;
+  min-width: 0;
+  word-break: break-word;
+}
+
+.config-checkbox-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+  min-height: 42px;
+  align-self: end;
+  margin: 0;
+  padding: 10px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  background: #ffffff;
+  color: var(--text-main, #0f172a);
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.config-checkbox-inline input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: var(--accent, #0d9488);
+}
+
+.config-selectable-row {
+  cursor: pointer;
+}
+
+.config-selectable-row input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+}
+
+.config-meta {
+  margin: 0;
+  font-size: 12px;
+  color: var(--muted, #64748b);
+  line-height: 1.45;
+}
+
+@media (max-width: 900px) {
+  .config-password-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .config-group {
+    padding: 14px;
+  }
+
+  .config-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .config-panel,
+  .config-section {
+    padding: 14px 16px;
+  }
+}
+
+@media (min-width: 1100px) {
+  .config-cards {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 14px;
+  }
+
+  .config-hub {
+    gap: 24px;
+  }
+}
+
+@media (max-width: 560px) {
+  .config-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .config-actions .config-btn,
+  .config-actions label.config-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .config-form__row .label {
+    flex-basis: 100%;
+  }
+}

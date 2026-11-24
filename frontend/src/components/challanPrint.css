@@ -1,0 +1,808 @@
+/* Challan print — screen preview (3 copies) + print (1 student / 1 A4 page) */
+
+/* Keep slip fonts independent of app shell (Plus Jakarta). Layout lives in rules below. */
+.challan-print-wrap,
+.print-area,
+.challan-page,
+.challan-copy {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.challan-print-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.challan-print-screen-btn {
+  align-self: flex-start;
+  width: fit-content;
+}
+
+.print-area {
+  background: #fff;
+  overflow: auto;
+}
+
+/* ── Screen: landscape sheet with 3 copies ── */
+.challan-page {
+  width: 297mm;
+  margin: 0 auto 12px;
+  padding: 4mm 1mm;
+  box-sizing: border-box;
+  background: #fff;
+}
+
+.challan-row {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 5mm;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.challan-copy {
+  flex: 1 1 0;
+  min-width: 0;
+  width: 33.333%;
+  padding: 0 1.5mm;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 10px;
+  line-height: 1.3;
+  color: #000;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.challan-copy:not(:last-child)::after {
+  content: "✂";
+  position: absolute;
+  top: 0;
+  right: -2.5mm;
+  transform: translateX(50%);
+  font-size: 9px;
+  line-height: 1;
+  z-index: 2;
+  background: #fff;
+  padding: 0 1px;
+}
+
+.challan-copy:not(:last-child) {
+  border-right: 1px dashed #000;
+}
+
+/* ── Section 1: Header + student ── */
+.ch-copy-header {
+  margin-bottom: 1mm;
+}
+
+.ch-school-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 3.5mm;
+}
+
+.ch-logo-wrap {
+  flex: 0 0 26mm;
+  width: 26mm;
+  height: 26mm;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ch-logo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  object-fit: contain;
+}
+
+.ch-school-text {
+  flex: 1;
+  min-width: 0;
+  text-align: center;
+  line-height: 1.25;
+  padding-right: 2mm;
+}
+
+.ch-school-name {
+  font-size: 15.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.2px;
+  line-height: 1.22;
+  text-align: center;
+}
+
+.ch-school-name-line {
+  display: block;
+  white-space: nowrap;
+  overflow: visible;
+}
+
+.ch-school-name-line + .ch-school-name-line {
+  margin-top: 1.5px;
+}
+
+.ch-school-address {
+  margin-top: 2.5px;
+  text-align: center;
+}
+
+.ch-school-line {
+  display: block;
+  font-size: 9.5px;
+  font-weight: 400;
+  text-transform: uppercase;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+.ch-school-session {
+  margin-top: 1px;
+  font-weight: 700;
+}
+
+.ch-student-area {
+  display: grid;
+  grid-template-columns: 1fr 24mm;
+  column-gap: 3mm;
+  margin-bottom: 4mm;
+  align-items: start;
+}
+
+.ch-student-fields {
+  font-size: 13.5px;
+  line-height: 1.55;
+}
+
+.ch-student-line {
+  margin-bottom: 4.5px;
+}
+
+.ch-student-line .ch-lbl {
+  font-weight: 700;
+}
+
+.ch-student-line .ch-val {
+  font-weight: 400;
+}
+
+.ch-due-wrap {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: start;
+  margin-top: 3mm;
+  margin-right: 2mm;
+  box-sizing: border-box;
+}
+
+.ch-due-box {
+  width: 100%;
+  border: 1px solid #000;
+  border-radius: 4px;
+  overflow: hidden;
+  text-align: center;
+}
+
+.ch-due-head {
+  background: #d4d4d4;
+  font-size: 9.5px;
+  font-weight: 700;
+  padding: 3px 2px;
+}
+
+.ch-due-date {
+  font-size: 15px;
+  font-weight: 700;
+  padding: 4px 2px 5px;
+  line-height: 1.05;
+}
+
+/* ── Section 2: Main tables ── */
+.ch-middle-tables {
+  display: flex;
+  flex-direction: row;
+  gap: 4mm;
+  align-items: flex-start;
+  margin-bottom: 5mm;
+}
+
+.ch-table-prev-wrap {
+  flex: 0 0 47%;
+  min-width: 0;
+}
+
+.ch-table-fee-wrap {
+  flex: 1 1 53%;
+  min-width: 0;
+}
+
+.ch-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-size: 11px;
+}
+
+.ch-table th,
+.ch-table td {
+  border: 1px solid #000;
+  padding: 5.5px 5px;
+  vertical-align: middle;
+  line-height: 1.42;
+}
+
+.ch-table .ch-num {
+  text-align: center;
+}
+
+.ch-table .ch-amt {
+  text-align: right;
+  padding-right: 5px;
+}
+
+.ch-prev-title th {
+  background: #d4d4d4;
+  font-weight: 700;
+  text-align: center;
+  font-size: 11px;
+  padding: 5px 4px;
+}
+
+.ch-prev-head th {
+  background: #d4d4d4;
+  font-weight: 700;
+  text-align: center;
+  font-size: 11px;
+  padding: 4.5px 4px;
+}
+
+.ch-prev-body {
+  font-size: 10px;
+  line-height: 1.45;
+}
+
+.ch-prev-table th:first-child,
+.ch-prev-body td.ch-prev-month {
+  text-align: left;
+  padding-left: 4px;
+  padding-right: 3px;
+  white-space: nowrap;
+  word-break: keep-all;
+  width: 44%;
+  min-width: 14mm;
+}
+
+.ch-prev-table th:nth-child(2),
+.ch-prev-body td.ch-num:nth-child(2) {
+  width: 28%;
+}
+
+.ch-prev-table th:nth-child(3),
+.ch-prev-body td.ch-num:nth-child(3) {
+  width: 28%;
+}
+
+.ch-fee-label {
+  text-align: left;
+  width: 68%;
+  font-size: 11px;
+}
+
+.ch-fee-row-highlight td {
+  background: #d4d4d4;
+  font-weight: 700;
+}
+
+.ch-fee-row-highlight .ch-amt {
+  font-weight: 700;
+}
+
+/* ── Section 3: Notes ── */
+.ch-notes {
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.5;
+  margin-bottom: 2.5mm;
+}
+
+.ch-notes div {
+  margin-bottom: 1px;
+}
+
+.ch-notes div:last-child {
+  margin-bottom: 0;
+}
+
+/* ── Section 4: Accountant (handwriting space) ── */
+.ch-accountant {
+  border: 1px solid #000;
+  border-radius: 5px;
+  padding: 7px 7px 9px;
+  margin-top: 4mm;
+  margin-bottom: 0;
+  font-size: 10px;
+  line-height: 1.5;
+  min-height: 22mm;
+}
+
+.ch-accountant-line {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 5px;
+  margin-bottom: 11px;
+  min-height: 9.5mm;
+}
+
+.ch-accountant-line:last-child {
+  margin-bottom: 0;
+}
+
+.ch-ac-field {
+  white-space: nowrap;
+  flex: 1 1 auto;
+}
+
+.ch-ac-blank {
+  display: inline-block;
+  min-width: 14mm;
+  border-bottom: 1px solid #000;
+  vertical-align: baseline;
+  height: 1.55em;
+  margin-left: 2px;
+}
+
+.ch-ac-blank--wide {
+  min-width: 22mm;
+}
+
+.ch-ac-field--remaining {
+  flex: 0 1 auto;
+}
+
+.ch-ac-blank--remaining {
+  min-width: 8mm;
+}
+
+/* ── Section 5: Footer ── */
+.ch-footer {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: space-between;
+  font-size: 10px;
+  line-height: 1.25;
+  margin-top: 3mm;
+  padding-top: 3mm;
+}
+
+.ch-footer-left {
+  display: flex;
+  flex-direction: row;
+  gap: 5mm;
+}
+
+.ch-copy-label {
+  font-size: 11.5px;
+  font-weight: 700;
+}
+
+@media screen {
+  .print-area {
+    border: 1px solid #ccc;
+  }
+
+  .challan-page {
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  }
+
+  .challan-adjustments-toggle {
+    margin-bottom: 1rem;
+  }
+
+  .challan-adjustments-toggle__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .challan-adjustments-toggle__hide {
+    background: #fff;
+    border: 1px solid #cbd5e1;
+  }
+
+  .challan-adjustments-toggle__hide:hover {
+    background: #f1f5f9;
+  }
+
+  .challan-arrears-edit {
+    margin-bottom: 0;
+    padding: 0.75rem 1rem;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+  }
+
+  .challan-arrears-edit__title {
+    margin: 0 0 0.25rem;
+    font-size: 0.95rem;
+  }
+
+  .challan-arrears-edit__hint {
+    margin: 0 0 0.75rem;
+    font-size: 0.8rem;
+    color: #64748b;
+  }
+
+  .challan-arrears-edit__list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .challan-arrears-edit__row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 1rem;
+    padding: 0.5rem 0.6rem;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+  }
+
+  .challan-arrears-edit__meta {
+    flex: 1 1 12rem;
+    min-width: 10rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+
+  .challan-arrears-edit__name {
+    font-weight: 600;
+  }
+
+  .challan-arrears-edit__class {
+    font-size: 0.8rem;
+    color: #64748b;
+  }
+
+  .challan-arrears-edit__field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    font-size: 0.75rem;
+    color: #64748b;
+  }
+
+  .challan-arrears-edit__fields {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 0.75rem 1rem;
+  }
+
+  .challan-arrears-edit__within {
+    font-size: 0.85rem;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .challan-arrears-edit__input {
+    width: 6rem;
+    padding: 0.25rem 0.4rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    font-size: 0.85rem;
+  }
+
+  .challan-arrears-edit__reset {
+    padding: 0.2rem 0.5rem;
+    font-size: 0.75rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    background: #fff;
+    cursor: pointer;
+  }
+
+  .challan-arrears-edit__reset:hover {
+    background: #f1f5f9;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PRINT: A4 landscape — one page per student, 3 copies (same as screen)
+   ══════════════════════════════════════════════════════════════ */
+@media print {
+  @page {
+    size: A4 landscape;
+    margin: 2mm;
+  }
+
+  html,
+  body,
+  #root {
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+    background: #fff !important;
+  }
+
+  .sidebar,
+  .header,
+  .no-print {
+    display: none !important;
+  }
+
+  .app-shell,
+  .app-layout,
+  .main-layout,
+  .main-content,
+  .page-card.challan-gen,
+  .challan-print-wrap,
+  #print-area {
+    position: static !important;
+    float: none !important;
+    width: auto !important;
+    min-height: 0 !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    background: #fff !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Hide challan form UI; print only the challan sheets */
+  .challan-gen > *:not(.challan-print-wrap) {
+    display: none !important;
+  }
+
+  .challan-print-wrap {
+    display: block !important;
+    gap: 0 !important;
+  }
+
+  .print-area {
+    overflow: visible !important;
+    border: none !important;
+  }
+
+  /* One A4 landscape page = one student (3 copies side by side).
+     Lock height so the last accountant/footer lines never spill to page 2. */
+  .challan-page.challan {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 1mm !important;
+    box-sizing: border-box;
+    background: #fff;
+    height: 206mm;
+    max-height: 206mm;
+    overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column;
+    page-break-inside: avoid;
+    break-inside: avoid-page;
+  }
+
+  .challan-page.challan:not(:last-child) {
+    page-break-after: always;
+    break-after: page;
+  }
+
+  .challan-page.challan:last-child {
+    page-break-after: avoid !important;
+    break-after: avoid !important;
+  }
+
+  .challan-row {
+    display: flex !important;
+    flex: 1 1 auto;
+    flex-direction: row;
+    align-items: stretch;
+    gap: 3mm;
+    width: 100%;
+    min-height: 0;
+    height: 100%;
+    box-sizing: border-box;
+    page-break-inside: avoid;
+    break-inside: avoid-page;
+  }
+
+  .challan-copy {
+    display: flex !important;
+    flex-direction: column;
+    flex: 1 1 0;
+    width: 33.333%;
+    min-width: 0;
+    max-width: none;
+    height: 100%;
+    min-height: 0;
+    padding: 0 1.5mm;
+    box-sizing: border-box;
+    overflow: hidden !important;
+    page-break-inside: avoid;
+    break-inside: avoid-page;
+    font-size: 10px;
+  }
+
+  .challan-copy:not(:last-child) {
+    border-right: 1px dashed #000;
+    padding-right: 2.5mm;
+  }
+
+  .challan-copy:not(:last-child)::after {
+    display: block;
+    right: -2mm;
+  }
+
+  .ch-copy-header {
+    flex-shrink: 0;
+    margin-bottom: 0.8mm;
+  }
+
+  .ch-student-area {
+    flex-shrink: 0;
+    margin-bottom: 1.8mm;
+  }
+
+  /* Tables stay compact — only a little space before the Note */
+  .ch-middle-tables {
+    flex: 0 0 auto;
+    min-height: 0;
+    margin-bottom: 1.5mm;
+  }
+
+  .ch-notes {
+    flex: 0 0 auto;
+    margin-bottom: 0;
+  }
+
+  /* Leftover page space goes here: Note → Accountant (writing room) */
+  .ch-accountant {
+    flex: 0 0 auto;
+    margin-top: auto;
+    margin-bottom: 0;
+    padding: 4px 5px 5px;
+    min-height: 14mm;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .ch-accountant-line {
+    margin-bottom: 5.5px;
+    min-height: 6mm;
+  }
+
+  .ch-accountant-line:last-child {
+    margin-bottom: 0;
+  }
+
+  .ch-ac-blank {
+    height: 1.3em;
+  }
+
+  /* Clear gap: Accountant → last line (Copy / Issue Date / Slip #) */
+  .ch-footer {
+    flex: 0 0 auto;
+    margin-top: 3mm;
+    padding-top: 0;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .ch-table th,
+  .ch-table td {
+    padding: 4px 4px;
+    line-height: 1.32;
+  }
+
+  .ch-student-line {
+    margin-bottom: 3px;
+  }
+
+  .ch-student-fields {
+    font-size: 12.5px;
+    line-height: 1.42;
+  }
+
+  .ch-school-row {
+    gap: 2.5mm;
+  }
+
+  .ch-logo-wrap {
+    flex: 0 0 22mm;
+    width: 22mm;
+    height: 22mm;
+  }
+
+  .ch-school-text {
+    padding-right: 1.5mm;
+    min-width: 0;
+  }
+
+  .ch-school-name {
+    font-size: 12.5px;
+    line-height: 1.18;
+    letter-spacing: 0.15px;
+  }
+
+  .ch-school-name-line + .ch-school-name-line {
+    margin-top: 1px;
+  }
+
+  .ch-school-address {
+    margin-top: 1.5px;
+  }
+
+  /* Do not clip school name — was cutting the final "L" of SCHOOL */
+  .ch-school-name-line {
+    white-space: nowrap;
+    overflow: visible;
+    text-overflow: clip;
+  }
+
+  .ch-school-line {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip;
+    font-size: 9px;
+    line-height: 1.25;
+  }
+
+  .ch-copy-label {
+    font-size: 11px;
+  }
+
+  .ch-table {
+    font-size: 10.5px;
+  }
+
+  .ch-prev-title th,
+  .ch-prev-head th {
+    font-size: 10.5px;
+  }
+
+  .ch-prev-body {
+    font-size: 9.5px;
+  }
+
+  .ch-fee-label {
+    font-size: 10.5px;
+  }
+
+  .ch-notes {
+    font-size: 12.5px;
+  }
+
+  .ch-accountant {
+    font-size: 10px;
+  }
+
+  .ch-footer {
+    font-size: 10px;
+  }
+
+  .ch-due-head {
+    font-size: 9.5px;
+  }
+
+  .ch-due-date {
+    font-size: 14.5px;
+  }
+}

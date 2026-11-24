@@ -1,0 +1,659 @@
+.expenses-page {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  width: 100%;
+}
+
+/* Centered, larger section switcher */
+.expenses-tabs-shell {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 4px 0 2px;
+}
+
+.expenses-tabs {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 6px;
+  border-radius: 16px;
+  border: 1px solid #99f6e4;
+  background:
+    linear-gradient(180deg, #f0fdfa 0%, #ffffff 100%);
+  box-shadow:
+    0 1px 2px rgba(15, 23, 42, 0.04),
+    0 10px 28px rgba(13, 148, 136, 0.08);
+}
+
+.expenses-tabs__btn {
+  appearance: none;
+  min-height: 46px;
+  min-width: 168px;
+  padding: 10px 22px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  background: transparent;
+  color: #475569;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  cursor: pointer;
+  transition:
+    background 180ms ease,
+    color 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.expenses-tabs__btn:hover {
+  color: var(--accent-strong, #0f766e);
+  background: rgba(204, 251, 241, 0.55);
+}
+
+.expenses-tabs__btn:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring, 0 0 0 3px rgba(13, 148, 136, 0.28));
+}
+
+.expenses-tabs__btn.is-active {
+  border-color: #0f766e;
+  background: linear-gradient(180deg, #0d9488 0%, #0f766e 100%);
+  color: #ffffff;
+  box-shadow:
+    0 1px 2px rgba(15, 23, 42, 0.08),
+    0 8px 18px rgba(13, 148, 136, 0.28);
+}
+
+.expenses-tabs__btn.is-active:hover {
+  color: #ffffff;
+  background: linear-gradient(180deg, #14b8a6 0%, #0f766e 100%);
+}
+
+@media (max-width: 700px) {
+  .expenses-tabs {
+    width: 100%;
+  }
+
+  .expenses-tabs__btn {
+    flex: 1 1 140px;
+    min-width: 0;
+    font-size: 14px;
+    padding: 10px 14px;
+  }
+}
+
+.staff-salaries {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.staff-salaries__hint {
+  margin: 0;
+  font-size: 13px;
+  color: var(--muted, #64748b);
+  line-height: 1.45;
+}
+
+.staff-salaries__staff-form {
+  display: grid;
+  grid-template-columns: minmax(0, 2.4fr) minmax(0, 1.4fr) minmax(0, 1.4fr) auto;
+  gap: 12px;
+  align-items: end;
+  width: 100%;
+}
+
+.staff-salaries__toolbar {
+  gap: 10px;
+  justify-content: flex-end;
+  padding-top: 4px;
+}
+
+.staff-salaries__toolbar .button {
+  min-height: 42px;
+  min-width: 148px;
+  font-weight: 700;
+}
+
+.staff-salaries__filters {
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.2fr) minmax(0, 1.4fr) minmax(0, 1.6fr);
+}
+
+.staff-salaries__absent-input {
+  width: 72px;
+  max-width: 100%;
+  margin: 0;
+  display: block;
+  text-align: left;
+}
+
+.staff-salaries__row--inactive td {
+  opacity: 0.62;
+}
+
+.staff-salaries__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 24px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 650;
+  background: #f1f5f9;
+  color: #475569;
+}
+
+.staff-salaries__badge--paid {
+  background: var(--status-paid-bg, #ecfdf5);
+  color: var(--status-paid, #047857);
+  border: 1px solid var(--status-paid-border, #6ee7b7);
+}
+
+.staff-salaries__staff-table,
+.staff-salaries__payroll-table {
+  width: 100%;
+  table-layout: fixed;
+}
+
+@media (max-width: 980px) {
+  .staff-salaries__staff-form {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .staff-salaries__staff-form .button {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 700px) {
+  .staff-salaries__staff-form {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Override global .card width cap for this page only. */
+.expenses-page .card {
+  width: 100%;
+  max-width: none;
+}
+
+.expenses-page__head {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.expenses-toolbar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.expenses-print-btn {
+  min-width: 140px;
+  min-height: 40px;
+  font-weight: 650;
+}
+
+/* Print title: hidden on screen (Reports-style sheet heading). */
+.expenses-print-title {
+  display: none;
+  margin: 0 0 10px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.expenses-screen-heading {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 750;
+  letter-spacing: -0.02em;
+  color: var(--text-main, #0f172a);
+}
+
+.expenses-entry-card,
+.expenses-table-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  border-color: #d1fae5;
+  background:
+    linear-gradient(180deg, rgba(240, 253, 250, 0.55) 0%, #ffffff 48%);
+}
+
+.expenses-entry-card h3,
+.expenses-table-card h3 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 750;
+  letter-spacing: -0.02em;
+  color: var(--text-main, #0f172a);
+}
+
+.expenses-entry-form {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 3fr) minmax(0, 2fr) auto;
+  gap: 12px;
+  align-items: end;
+  width: 100%;
+}
+
+.expenses-entry-form .button,
+.staff-salaries__staff-form .button {
+  min-height: 42px;
+  font-weight: 700;
+  padding-inline: 18px;
+}
+
+.expenses-filters {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 3fr) minmax(0, 3fr);
+  gap: 12px;
+  align-items: end;
+  width: 100%;
+  border-color: #ccfbf1;
+  background: #ffffff;
+}
+
+.expenses-filters__total {
+  min-height: 48px;
+  border: 1px solid #99f6e4;
+  border-radius: 12px;
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+  background: linear-gradient(180deg, #f0fdfa 0%, #ffffff 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.expenses-filters__total-label {
+  font-size: 12px;
+  font-weight: 650;
+  color: var(--text-muted, #64748b);
+  letter-spacing: 0.01em;
+}
+
+.expenses-filters__total-value {
+  font-size: 20px;
+  line-height: 1.15;
+}
+
+.expenses-banner {
+  border: 1px solid #dbe3ee;
+  border-radius: 12px;
+  padding: 11px 14px;
+  font-size: 13px;
+  color: var(--text);
+  background: #f8fafc;
+}
+
+.expenses-banner--error {
+  border-color: #fecaca;
+  background: #fef2f2;
+  color: #991b1b;
+}
+
+.expenses-banner--info {
+  border-color: #99f6e4;
+  background: #f0fdfa;
+  color: #0f766e;
+}
+
+.expenses-table-wrap {
+  overflow: auto;
+  border: 1px solid #d1fae5;
+  border-radius: 12px;
+  width: 100%;
+  max-inline-size: 100%;
+  background: #ffffff;
+}
+
+.expenses-table {
+  width: 100%;
+  table-layout: fixed;
+}
+
+/*
+  Beat global layout.css table rules:
+  headers were left-aligned while money cells were right-aligned,
+  so values looked like they sat under the next column heading.
+  Keep heading + entry on the SAME left edge in every column.
+*/
+.main-content .expenses-page table.expenses-table thead th,
+.main-content .expenses-page table.expenses-table tbody td,
+.main-content .expenses-page table.expenses-table tfoot td {
+  text-align: left !important;
+  vertical-align: middle;
+  padding: 12px 14px;
+  overflow-wrap: anywhere;
+}
+
+.main-content .expenses-page table.expenses-table .expenses-col--text {
+  font-weight: 550;
+}
+
+.main-content .expenses-page table.expenses-table .expenses-col--num,
+.main-content .expenses-page table.expenses-table .expenses-number {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+.main-content .expenses-page table.expenses-table .expenses-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.expenses-table td.expenses-col--num .input,
+.expenses-table td.expenses-col--text .input {
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Column widths: general expenses */
+.expenses-table--general col.expenses-col-name {
+  width: 40%;
+}
+
+.expenses-table--general col.expenses-col-date {
+  width: 18%;
+}
+
+.expenses-table--general col.expenses-col-amount {
+  width: 18%;
+}
+
+.expenses-table--general col.expenses-col-actions {
+  width: 24%;
+}
+
+/* Column widths: staff members */
+.staff-salaries__staff-table col.staff-col-name {
+  width: 26%;
+}
+
+.staff-salaries__staff-table col.staff-col-salary {
+  width: 16%;
+}
+
+.staff-salaries__staff-table col.staff-col-deduction {
+  width: 18%;
+}
+
+.staff-salaries__staff-table col.staff-col-status {
+  width: 12%;
+}
+
+.staff-salaries__staff-table col.staff-col-actions {
+  width: 28%;
+}
+
+/* Column widths: monthly payroll */
+.staff-salaries__payroll-table col.pay-col-staff {
+  width: 20%;
+}
+
+.staff-salaries__payroll-table col.pay-col-salary {
+  width: 14%;
+}
+
+.staff-salaries__payroll-table col.pay-col-absents {
+  width: 10%;
+}
+
+.staff-salaries__payroll-table col.pay-col-deduction {
+  width: 13%;
+}
+
+.staff-salaries__payroll-table col.pay-col-payable {
+  width: 13%;
+}
+
+.staff-salaries__payroll-table col.pay-col-status {
+  width: 12%;
+}
+
+.staff-salaries__payroll-table col.pay-col-actions {
+  width: 18%;
+}
+
+.expenses-btn {
+  min-height: 36px;
+  padding: 7px 12px;
+  border-radius: 9px;
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.expenses-btn--muted {
+  border-color: #94a3b8;
+  background: #94a3b8;
+}
+
+.expenses-btn--muted:hover {
+  border-color: #64748b;
+  background: #64748b;
+}
+
+.expenses-btn--danger {
+  border-color: #dc2626;
+  background: #dc2626;
+}
+
+.expenses-btn--danger:hover {
+  border-color: #b91c1c;
+  background: #b91c1c;
+}
+
+.expenses-page input[type="number"]::-webkit-outer-spin-button,
+.expenses-page input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.expenses-page input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+@media (max-width: 980px) {
+  .expenses-entry-form {
+    grid-template-columns: 2fr 2fr;
+  }
+
+  .expenses-entry-form .button {
+    grid-column: 1 / -1;
+  }
+
+  .expenses-filters {
+    grid-template-columns: 2fr 2fr;
+  }
+
+  .expenses-filters__total {
+    grid-column: 1 / -1;
+  }
+
+  .main-content .expenses-page table.expenses-table .expenses-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+@media (max-width: 700px) {
+  .expenses-entry-form,
+  .expenses-filters {
+    grid-template-columns: 1fr;
+  }
+
+  .expenses-entry-form .button,
+  .expenses-filters__total {
+    grid-column: auto;
+  }
+}
+
+@media print {
+  body {
+    background: #ffffff !important;
+  }
+
+  .expenses-no-print,
+  .sidebar,
+  .header {
+    display: none !important;
+  }
+
+  .app-shell,
+  .app-layout,
+  .main-layout,
+  .main-content {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+
+  .expenses-page {
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    gap: 8px;
+  }
+
+  .expenses-page > header .page-title {
+    display: none;
+  }
+
+  .expenses-print-title {
+    display: block;
+    margin: 0 0 8px;
+    font-size: 12px;
+    line-height: 1.3;
+    color: #111827 !important;
+    break-after: avoid;
+  }
+
+  .expenses-screen-heading {
+    display: none;
+  }
+
+  .expenses-print-panel {
+    border: none !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+  }
+
+  .expenses-table-wrap {
+    overflow: visible !important;
+    max-height: none !important;
+    border: 1px solid #cbd5e1 !important;
+    border-radius: 0;
+  }
+
+  .expenses-table {
+    width: 100% !important;
+    border-collapse: collapse;
+    font-size: 10px;
+    table-layout: fixed;
+  }
+
+  .expenses-table th,
+  .expenses-table td {
+    padding: 4px 6px !important;
+    color: #000000 !important;
+    border-bottom: 1px solid #cbd5e1;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .expenses-table th {
+    background: #f1f5f9 !important;
+    font-weight: 700;
+  }
+
+  .expenses-tfoot-total td {
+    background: #eef2ff !important;
+    font-weight: 700;
+  }
+
+  .expenses-table thead {
+    display: table-header-group;
+  }
+
+  .expenses-table tfoot {
+    display: table-footer-group;
+  }
+
+  .expenses-table tr {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .expenses-table input.input {
+    border: none !important;
+    padding: 0 !important;
+    background: transparent !important;
+    font: inherit !important;
+    color: inherit !important;
+    box-shadow: none !important;
+  }
+}
+
+/* Aqua Ledger polish */
+.expenses-page__head.page-header {
+  margin-bottom: 2px;
+}
+
+.expenses-filters__total-value {
+  font-weight: 780;
+  letter-spacing: -0.02em;
+  color: var(--accent-strong, #0f766e);
+  font-variant-numeric: tabular-nums;
+}
+
+.expenses-entry-card,
+.expenses-table-card,
+.expenses-filters {
+  border-radius: 16px;
+  box-shadow: var(--panel-shadow-sm, 0 1px 2px rgba(15, 23, 42, 0.04));
+}
+
+.expenses-table thead th {
+  background: linear-gradient(180deg, #f0fdfa 0%, #ecfdf5 100%);
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  white-space: nowrap;
+  color: #0f766e;
+  font-weight: 750;
+}
+
+.expenses-tfoot-total td {
+  font-weight: 750;
+  background: #f0fdfa;
+  border-bottom: none;
+}
+
+.staff-salaries__badge {
+  border: 1px solid #e2e8f0;
+}
+
+.staff-salaries__badge--paid {
+  border-color: var(--status-paid-border, #6ee7b7);
+}

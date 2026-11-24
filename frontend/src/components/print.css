@@ -1,0 +1,376 @@
+/* ——— Screen preview shell ——— */
+.challan-print-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: stretch;
+}
+
+.challan-print-area {
+  background: #fff;
+  color: #111;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  overflow: auto;
+}
+
+.challan-print-btn {
+  align-self: flex-start;
+  width: fit-content;
+}
+
+/* ——— Pagination ——— */
+.page {
+  page-break-after: always;
+  break-after: page;
+}
+
+.challan-page {
+  box-sizing: border-box;
+  width: 210mm;
+  min-height: 297mm;
+  margin: 0 auto;
+  padding: 10mm;
+  background: #fff;
+  color: #111;
+}
+
+.page:last-child,
+.challan-page:last-child {
+  page-break-after: auto;
+  break-after: auto;
+}
+
+.challan-page__inner,
+.challan-sheet {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5mm;
+  align-items: stretch;
+  min-height: calc(297mm - 20mm);
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.print-container {
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+@media (max-width: 900px) {
+  .challan-page__inner,
+  .challan-sheet {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ——— One slip (School or Student copy) ——— */
+.challan-copy {
+  box-sizing: border-box;
+  border: 1px solid #1a1a1a;
+  padding: 4mm 3.5mm;
+  display: flex;
+  flex-direction: column;
+  gap: 3mm;
+  font-family: "Times New Roman", Times, Georgia, serif;
+  font-size: 9.5pt;
+  line-height: 1.38;
+  color: #111;
+}
+
+.challan-copy__header {
+  display: flex;
+  gap: 3mm;
+  align-items: flex-start;
+  padding-bottom: 2mm;
+  border-bottom: 2px solid #111;
+}
+
+.challan-copy__logo {
+  flex-shrink: 0;
+  width: 14mm;
+  height: 14mm;
+  border: 1px solid #222;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fafafa;
+}
+
+.challan-copy__logo-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.challan-copy__logo-text {
+  font-size: 11pt;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.challan-copy__header-main {
+  flex: 1;
+  min-width: 0;
+  text-align: center;
+}
+
+.challan-copy__label {
+  display: inline-block;
+  margin-bottom: 1mm;
+  padding: 1px 6px;
+  font-size: 7.5pt;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1px solid #111;
+  background: #eee;
+}
+
+.challan-copy__school {
+  margin: 0 0 1mm;
+  font-size: 12.5pt;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  line-height: 1.15;
+}
+
+.challan-copy__tagline {
+  margin: 0;
+  font-size: 8.5pt;
+  color: #333;
+}
+
+.challan-copy__doc-title {
+  margin: 2mm 0 0;
+  font-size: 10pt;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.challan-copy__section {
+  margin: 0;
+}
+
+.challan-copy__section-title {
+  margin: 0 0 1.5mm;
+  font-size: 8.5pt;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 1mm;
+}
+
+.challan-copy__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5mm 3mm;
+}
+
+.challan-copy__cell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5mm;
+  min-width: 0;
+}
+
+.challan-copy__k {
+  font-size: 7.5pt;
+  font-weight: 700;
+  color: #333;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.challan-copy__v {
+  font-size: 9pt;
+  font-weight: 600;
+  word-break: break-word;
+}
+
+.challan-copy__v--mono {
+  font-size: 7.5pt;
+  font-family: ui-monospace, monospace;
+  word-break: break-all;
+}
+
+.challan-copy__table-wrap {
+  overflow: hidden;
+}
+
+.challan-copy__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 8.5pt;
+}
+
+.challan-copy__table th,
+.challan-copy__table td {
+  border: 1px solid #222;
+  padding: 1.5mm 1.8mm;
+  vertical-align: top;
+}
+
+.challan-copy__table th {
+  background: #f0f0f0;
+  font-weight: 800;
+  text-align: left;
+}
+
+.challan-copy__table--compact th,
+.challan-copy__table--compact td {
+  padding: 1mm 1.5mm;
+  font-size: 8pt;
+}
+
+.challan-copy__num {
+  text-align: right !important;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.challan-copy__table-empty {
+  text-align: center !important;
+  font-style: italic;
+  color: #555;
+}
+
+.challan-copy__totals-box {
+  border: 1px solid #222;
+  padding: 2mm 2.5mm;
+}
+
+.challan-copy__total-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 4mm;
+  padding: 1mm 0;
+  font-size: 9pt;
+  font-variant-numeric: tabular-nums;
+}
+
+.challan-copy__total-row--due {
+  margin-top: 1mm;
+  padding-top: 2mm;
+  border-top: 2px solid #111;
+  font-weight: 800;
+  font-size: 9.5pt;
+}
+
+.challan-copy__notes-body {
+  margin: 0;
+  font-size: 8.5pt;
+  line-height: 1.45;
+  color: #222;
+}
+
+.challan-copy__footer {
+  margin-top: auto;
+  padding-top: 2mm;
+}
+
+.challan-copy__signatures {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4mm;
+  text-align: center;
+  font-size: 8pt;
+  font-weight: 700;
+}
+
+.challan-copy__sign-line {
+  height: 1px;
+  background: #111;
+  margin-bottom: 1.5mm;
+}
+
+.challans-toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 640px;
+  margin-bottom: 20px;
+}
+
+.no-print {
+  /* hidden in @media print */
+}
+
+@media print {
+  @page {
+    size: A4;
+    margin: 10mm;
+  }
+
+  html,
+  body,
+  #root {
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+  }
+
+  body:has(#print-area) .sidebar,
+  body:has(#print-area) .header,
+  body:has(#print-area) .no-print {
+    display: none !important;
+  }
+
+  body:has(#print-area) .app-shell,
+  body:has(#print-area) .app-layout,
+  body:has(#print-area) .main-layout,
+  body:has(#print-area) .main-content,
+  body:has(#print-area) #print-area {
+    position: static !important;
+    min-height: 0 !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    background: #fff !important;
+  }
+
+  .page {
+    page-break-after: always;
+    break-after: page;
+  }
+
+  .challan-page {
+    width: 100%;
+    max-width: 100%;
+    min-height: 0;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+    border: none;
+  }
+
+  .page:last-child,
+  .challan-page:last-child {
+    page-break-after: auto;
+    break-after: auto;
+  }
+
+  .challan-page__inner,
+  .challan-sheet {
+    grid-template-columns: 1fr 1fr;
+    gap: 4mm;
+    min-height: 0;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .print-container {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+}

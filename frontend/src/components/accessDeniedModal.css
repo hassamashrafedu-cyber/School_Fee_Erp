@@ -1,0 +1,70 @@
+.access-denied-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(15, 23, 42, 0.45);
+}
+
+.access-denied-dialog {
+  width: min(420px, 100%);
+  padding: 22px 24px;
+  border-radius: 12px;
+  border: 1px solid #dbe3ee;
+  background: #ffffff;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.18);
+}
+
+.access-denied-dialog__title {
+  margin: 0 0 10px;
+  font-size: 18px;
+  color: #0f172a;
+}
+
+.access-denied-dialog__message {
+  margin: 0 0 18px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #475569;
+}
+
+.access-denied-dialog {
+  border-radius: 16px;
+  border-color: var(--panel-border, #dbe3ee);
+  box-shadow: 0 24px 60px rgba(2, 6, 23, 0.28);
+}
+
+.access-denied-dialog__btn {
+  margin-top: 0;
+  border: 1px solid #0f766e;
+  background: #0d9488;
+  color: #ffffff;
+  border-radius: 10px;
+  min-height: 40px;
+  padding: 8px 14px;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.access-denied-dialog__btn:hover {
+  background: #0f766e;
+  border-color: #115e59;
+}
+
+@media (max-width: 480px) {
+  .access-denied-backdrop {
+    padding: 12px;
+    align-items: flex-end;
+  }
+
+  .access-denied-dialog {
+    width: 100%;
+  }
+
+  .access-denied-dialog__btn {
+    width: 100%;
+  }
+}

@@ -1,0 +1,38 @@
+# Environment / secrets (keep .env.example)
+.env
+.env.*
+!.env.example
+
+# Dependencies
+node_modules/
+
+# Build / packaging outputs
+dist/
+build/
+release/
+staging/
+
+# Installers and Electron artifacts
+*.exe
+*.msi
+*.dmg
+*.AppImage
+*.blockmap
+*.snap
+
+# Database / private backups
+*.backup
+*.sql.gz
+*.dump
+*.pgdump
+
+# Local dumps / private notes
+full-project-tree.txt
+
+# Logs and OS junk
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.DS_Store
+Thumbs.db
+*.log

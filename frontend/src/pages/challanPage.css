@@ -1,0 +1,187 @@
+.challan-gen {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  max-width: none;
+}
+
+.challan-gen__intro {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.challan-gen__banner {
+  font-size: 13px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--status-danger-border, #fecdd3);
+  background: var(--status-danger-bg, #fff1f2);
+  color: #9f1239;
+}
+
+.challan-gen__banner--info {
+  border-color: var(--status-info-border, #bae6fd);
+  background: var(--status-info-bg, #f0f9ff);
+  color: #0c4a6e;
+}
+
+.challan-gen__banner--skip {
+  border-color: #cbd5e1;
+  background: #f1f5f9;
+  color: #334155;
+  font-weight: 500;
+}
+
+.challan-gen__flow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.challan-gen__flow-step {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid #e2e8f0;
+  background: #f8fafc;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted, #64748b);
+}
+
+.challan-gen__flow-step.is-active {
+  border-color: #99f6e4;
+  background: #f0fdfa;
+  color: #0f766e;
+}
+
+.challan-gen__flow-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  background: #e2e8f0;
+  color: #334155;
+  font-size: 10px;
+}
+
+.challan-gen__flow-step.is-active .challan-gen__flow-num {
+  background: #0d9488;
+  color: #ffffff;
+}
+
+.challan-gen__toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: flex-end;
+  padding: 14px 16px;
+  border: 1px solid var(--panel-border, #e2e8f0);
+  border-radius: 14px;
+  background: var(--panel-soft, #f8fafc);
+}
+
+.challan-gen__toolbar .label {
+  flex: 1 1 200px;
+  min-width: 160px;
+}
+
+.challan-gen__toolbar--filters {
+  border-bottom: none;
+}
+
+.challan-gen__hint {
+  margin-top: -4px;
+}
+
+.challan-gen__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid #99f6e4;
+  background: rgba(240, 253, 250, 0.9);
+}
+
+.challan-gen__actions .button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.challan-gen__btn--secondary {
+  background: #ffffff !important;
+  border-color: #99f6e4 !important;
+  color: #0f766e !important;
+}
+
+.challan-gen__btn--secondary:hover:not(:disabled) {
+  background: #f0fdfa !important;
+  border-color: #0d9488 !important;
+}
+
+.challan-gen__summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+  align-items: center;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--panel-border, #e2e8f0);
+  background: #ffffff;
+  font-size: 13px;
+  color: var(--text-muted, #64748b);
+}
+
+.challan-gen__summary strong {
+  color: var(--text-main, #0f172a);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Challan slip preview/print: do not wrap or restyle â€” owned by challanPrint.css */
+
+/* ——— Responsive ——— */
+@media (max-width: 900px) {
+  .challan-gen__toolbar {
+    align-items: stretch;
+  }
+
+  .challan-gen__toolbar .label {
+    flex: 1 1 100%;
+    min-width: 0;
+  }
+
+  .challan-gen__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .challan-gen__actions .button {
+    width: 100%;
+  }
+
+  .challan-gen__summary {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 640px) {
+  .challan-gen__flow-step {
+    flex: 1 1 auto;
+    justify-content: center;
+  }
+}

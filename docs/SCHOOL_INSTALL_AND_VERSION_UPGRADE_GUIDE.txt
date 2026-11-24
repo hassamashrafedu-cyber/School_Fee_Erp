@@ -1,0 +1,206 @@
+FEE ERP - SCHOOL INSTALLATION AND SAFE VERSION UPGRADE GUIDE
+============================================================
+
+Purpose
+-------
+This guide helps you:
+1) Install the software on a new school PC.
+2) Add new features in backend/frontend for next versions.
+3) Release updates without disturbing the school's existing database/data.
+
+
+------------------------------------------------------------
+A) FIRST-TIME INSTALLATION ON SCHOOL PC (WINDOWS)
+------------------------------------------------------------
+
+1. Pre-requisites
+   - Windows PC
+   - PostgreSQL installed and running
+   - Database user with create/read/write permissions
+
+2. Create database (example names)
+   - DB Name: school_management_db
+   - DB User: postgres (or school-specific user)
+
+3. Apply database scripts (first setup)
+   Run in this order:
+   1) database/schema.sql
+   2) all patch_*.sql files (if not already included in schema)
+
+4. Install app build
+   - Use installer generated from frontend/release (NSIS .exe).
+   - Complete installation on school PC.
+
+5. Configure backend environment
+   Set database and JWT values in backend .env used by the installed app:
+   - DB_HOST
+   - DB_PORT
+   - DB_USER
+   - DB_PASSWORD
+   - DB_NAME
+   - JWT_SECRET
+   - PORT (default 5000)
+
+6. Smoke test
+   - Open app, login with admin.
+   - Open Dashboard, Students, Fee pages.
+   - Create one test student and one test payment.
+   - Verify data is stored in existing DB.
+
+
+------------------------------------------------------------
+B) WHEN ADDING A NEW FEATURE FOR NEXT VERSION
+------------------------------------------------------------
+
+Use this decision first:
+
+CASE 1: Feature WITHOUT database change
+---------------------------------------
+Examples:
+- New UI page/report
+- Validation changes in frontend/backend
+- New API that reads existing tables only
+
+What to do:
+1) Implement frontend/backend changes.
+2) Keep existing API contracts stable where possible.
+3) Test against a copy of an existing school database.
+4) Bump app version and release installer.
+5) No SQL migration required.
+
+
+CASE 2: Feature WITH database change
+------------------------------------
+Examples:
+- New table
+- New column
+- New index
+- New reference/relationship
+
+What to do:
+1) Create a new migration file in database/:
+   patch_YYYYMMDD_feature_name.sql
+
+2) Migration rules (VERY IMPORTANT):
+   - Prefer additive changes:
+     * ADD TABLE
+     * ADD COLUMN with DEFAULT/NULL-safe behavior
+   - Avoid destructive changes in production:
+     * DO NOT DROP TABLE/COLUMN for school live DB
+     * DO NOT rename/remove old columns without compatibility period
+   - Make migration idempotent when possible:
+     * Use IF NOT EXISTS checks
+   - Add backfill/update statements safely for old rows.
+   - Wrap multi-step changes in transaction if safe.
+
+3) Keep backward compatibility in backend code:
+   - Old rows should still work after deployment.
+   - Handle null/empty values from pre-migration records.
+
+4) Test migration on a DB backup copy before school deployment.
+
+
+------------------------------------------------------------
+C) SAFE RELEASE PROCESS (NO DATA DISTURBANCE)
+------------------------------------------------------------
+
+Follow this checklist for every new version:
+
+1) Freeze release
+   - Finalize code and SQL patch files.
+   - Update version in frontend/package.json (and release notes).
+
+2) Backup school database (MANDATORY)
+   Example:
+   pg_dump -h <host> -p <port> -U <user> -d <db_name> -F c -f backup_before_vX_Y_Z.dump
+
+3) Dry-run on staging copy
+   - Restore backup on test DB.
+   - Run new migration(s).
+   - Run new app version against that DB.
+   - Validate fees, challans, reports, payments.
+
+4) Build release package
+   In frontend:
+   - npm run predist
+   - npm run dist
+
+5) School deployment order
+   Recommended sequence:
+   a) Stop app at school PC
+   b) Take DB backup again
+   c) Apply SQL migration(s) to school production DB
+   d) Install/upgrade new app version
+   e) Run smoke test
+
+6) Post-release verification
+   - Login works
+   - Existing students and fee history visible
+   - New feature works
+   - New transactions are saved correctly
+
+
+------------------------------------------------------------
+D) ROLLBACK PLAN (IF ANY ISSUE AFTER UPDATE)
+------------------------------------------------------------
+
+1) Stop new app version.
+2) Restore DB backup:
+   pg_restore -h <host> -p <port> -U <user> -d <db_name> --clean --if-exists backup_before_vX_Y_Z.dump
+3) Reinstall previous stable app version.
+4) Verify school operations are normal.
+
+Note:
+- Never deploy without a fresh backup.
+- Keep at least last 2 stable installers and matching DB backups.
+
+
+------------------------------------------------------------
+E) VERSIONING + RELEASE NOTES TEMPLATE
+------------------------------------------------------------
+
+Use simple semantic style:
+- MAJOR.MINOR.PATCH
+- Example: 1.4.0
+
+Increase version:
+- PATCH: bug fix only (no behavior break)
+- MINOR: new feature (backward compatible)
+- MAJOR: breaking changes (avoid for live schools unless necessary)
+
+Release note format:
+Version: vX.Y.Z
+Date:
+Backend changes:
+Frontend changes:
+Database changes (Yes/No):
+Migration files:
+Manual steps at school:
+Rollback reference:
+
+
+------------------------------------------------------------
+F) QUICK "NO-DISTURBANCE" RULES
+------------------------------------------------------------
+
+1) Backup first, always.
+2) Additive DB changes only for live systems.
+3) Keep old data readable by new code.
+4) Test new version with old real-like data before rollout.
+5) Deploy in order: backup -> migrate DB -> install app -> verify.
+
+
+------------------------------------------------------------
+G) YOUR NEXT VERSION CHECKLIST (COPY/USE EACH RELEASE)
+------------------------------------------------------------
+
+[ ] Code complete in frontend/backend
+[ ] Version bumped
+[ ] Migration file added (if DB change)
+[ ] Migration tested on DB copy
+[ ] School DB backup taken
+[ ] Installer built
+[ ] Deployment performed in correct order
+[ ] Smoke test passed
+[ ] Rollback package + backup stored safely
+
