@@ -15,8 +15,6 @@ The frontend can also be packaged with Electron for a Windows desktop installati
 
 ## Screenshots
 
-Add images to the `/screenshots` folder and update these paths when available.
-
 | Dashboard | Student list |
 | --- | --- |
 | ![Dashboard](screenshots/dashboard.png) | ![Student list](screenshots/student-list.png) |
@@ -96,7 +94,7 @@ createdb school_management_db
 psql -d school_management_db -f database/schema.sql
 ```
 
-`database/schema.sql` is the full schema for a fresh database. The repository also contains `database/patch_*.sql` scripts for changes and upgrades. For an existing installation, back up the database first and apply only the patches needed for that database version; do not blindly rerun every patch. See `docs/SCHOOL_INSTALL_AND_VERSION_UPGRADE_GUIDE.txt`.
+`database/schema.sql` is the full schema for a fresh database. The repository also contains `database/patch_*.sql` scripts for changes and upgrades. For an existing installation, back up the database before applying patches.
 
 ### Backend setup
 
@@ -159,7 +157,7 @@ Frontend environment variables in `frontend/.env.example`:
 
 ### Electron desktop app and installer
 
-Install backend and frontend dependencies as above. The Electron desktop process starts the packaged backend; configure the backend `.env` and PostgreSQL connection as described above. Run the combined development workflow from `frontend/`:
+Install backend and frontend dependencies as above. The Electron desktop process starts the packaged backend; configure the backend `.env` and PostgreSQL connection as described above. Run the complete development environment from `frontend/`:
 
 ```bash
 npm run dev
@@ -171,16 +169,16 @@ Build the Windows installer from `frontend/`:
 npm run dist
 ```
 
-The configured installer output is under `frontend/release/0.1.0/`. To produce an unpacked build instead, run `npm run dist:dir`. Packaging preflight and output checks are available with `npm run pack:verify` and `npm run pack:verify-out`; see `frontend/PACKAGING.md` for the packaging flow and deployment notes.
+The configured installer output is under `frontend/release/0.1.0/`. To produce an unpacked build instead, run `npm run dist:dir`. Packaging preflight and output checks are available with `npm run package:check`.
 
 ## Roles and Permissions
 
 | Role | Verified access in the code |
 | --- | --- |
-| Administrator | Access to dashboard and settings screens; can manage settings and passwords, academic-year changes and student promotions, staff payroll mutations, and administrative purge actions. Also has access to the shared operational workflows. |
-| Accountant | Access to shared student, class, fee, challan, payment, expense, and reporting workflows, plus WhatsApp reminders. The dashboard and settings screens and the explicitly admin-only operations are restricted. |
+| Administrator | Access to dashboard and settings screens; can manage settings and passwords, academic-year changes and student promotions, staff payroll mutations, and administrative purge actions. |
+| Accountant | Access to shared student, class, fee, challan, payment, expense, and reporting workflows, plus WhatsApp reminders. The dashboard and settings screens and the explicitly admin-only API operations are not part of the accountant role. |
 
-Most operational API routes require authentication. Specific operations are additionally restricted in backend routes; the frontend also hides or blocks selected admin-only screens. See `backend/src/routes/` for the current route-level rules.
+Most operational API routes require authentication. Specific operations are additionally restricted in backend routes; the frontend also hides or blocks selected admin-only screens. See `backend/routes/` and `frontend/src/` for the enforced permissions.
 
 ## Security Notes
 
